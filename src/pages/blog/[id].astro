@@ -1,9 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
 import { identity } from "../../config";
 import LangText from "../../components/LangText.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("posts");
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+  }));
+}
 
 const { id } = Astro.params;
 const entry = await getEntry("posts", id as string);
