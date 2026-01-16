@@ -1,0 +1,14 @@
+---
+import type { LocalizedString } from "../types/config";
+
+type Props = {
+  text: LocalizedString;
+  className?: string;
+};
+
+const { text, className } = Astro.props;
+const classes = className ? ` ${className}` : "";
+---
+
+<span class={`lang-en${classes}`}>{text.en}</span>
+<span class={`lang-es${classes}`}>{text.es}</span>

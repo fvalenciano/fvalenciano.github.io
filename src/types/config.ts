@@ -1,11 +1,16 @@
+export type LocalizedString = {
+  en: string;
+  es: string;
+};
+
 export type NavBarLink = {
-  title: string;
+  title: LocalizedString;
   url: string;
   external?: boolean;
 };
 
 export type SocialLink = {
-  title: string;
+  title: LocalizedString;
   url: string;
   icon: string;
   external?: boolean;
@@ -14,6 +19,7 @@ export type SocialLink = {
 export type Identity = {
   name: string;
   logo: string;
+  avatar: string;
   email: string;
 };
 
@@ -25,18 +31,18 @@ export type SEOInfo = {
 
 export type HomePageContent = {
   seo: SEOInfo;
-  role: string;
-  description: string;
+  role: LocalizedString;
+  description: LocalizedString;
   socialLinks: SocialLink[];
   links: {
-    title: string;
+    title: LocalizedString;
     url: string;
     external?: boolean;
   }[];
 };
 
 export type ResumeItem = {
-  title: string;
+  title: LocalizedString;
   company: {
     name: string;
     image: string;
@@ -47,9 +53,9 @@ export type ResumeItem = {
 
 export type AboutPageContent = {
   seo: SEOInfo;
-  subtitle: string;
+  subtitle: LocalizedString;
   about: {
-    description: string;
+    description: LocalizedString;
     image_l: {
       url: string;
       alt: string;
@@ -59,12 +65,16 @@ export type AboutPageContent = {
       alt: string;
     };
   };
+  education: {
+    description: LocalizedString;
+    items: ResumeItem[];
+  };
   work: {
-    description: string;
+    description: LocalizedString;
     items: ResumeItem[];
   };
   connect: {
-    description: string;
+    description: LocalizedString;
     links: SocialLink[];
   };
 };
@@ -79,11 +89,11 @@ export type Project = {
 
 export type ProjectPageContent = {
   seo: SEOInfo;
-  subtitle: string;
+  subtitle: LocalizedString;
   projects: Project[];
 };
 
 export type BlogPageContent = {
   seo: SEOInfo;
-  subtitle: string;
+  subtitle: LocalizedString;
 };

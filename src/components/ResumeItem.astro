@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import LangText from "./LangText.astro";
 import type { ResumeItem } from "../types/config";
 
 type Props = ResumeItem;
@@ -20,7 +21,7 @@ const { title, company, date } = Astro.props;
       class="rounded-full w-[40px] h-[40px] object-cover"
     />
     <div>
-      <h3 class="font-medium">{title}</h3>
+      <h3 class="font-medium"><LangText text={title} /></h3>
       <p class="text-sm opacity-60">{company.name}</p>
     </div>
   </div>

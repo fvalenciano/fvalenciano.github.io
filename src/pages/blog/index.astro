@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { blogPageContent } from "../../config";
 import { render } from "astro:content";
+import LangText from "../../components/LangText.astro";
 
 const posts = await getCollection("posts");
 posts.sort((a, b) => {
@@ -18,9 +19,14 @@ for (const post of posts) {
 ---
 
 <Layout seo={blogPageContent.seo}>
-  <section class="mt-10 max-w-2xl mx-auto px-6">
-    <h1 class="font-bold text-3xl mb-1">Blog</h1>
-    <p class="opacity-60 mb-14">{blogPageContent.subtitle}</p>
+  <section class="mt-10 max-w-3xl mx-auto px-8">
+    <h1 class="font-bold text-3xl mb-1">
+      <span class="lang-en">Blog</span>
+      <span class="lang-es">Blog</span>
+    </h1>
+    <p class="opacity-60 mb-14">
+      <LangText text={blogPageContent.subtitle} />
+    </p>
 
     <div class="grid grid-cols-1 gap-10 sm:gap-6 mb-10">
       {
@@ -41,8 +47,12 @@ for (const post of posts) {
                 {post.data.pubDate.toLocaleDateString()} ·{" "}
                 {post.data.readingTime}
               </p>
-              <h3 class="font-medium hover-underline">{post.data.title}</h3>
-              <p class="text-sm opacity-60 mt-2 mb-3">{post.data.description}</p>
+              <h3 class="font-medium hover-underline">
+                <LangText text={post.data.title} />
+              </h3>
+              <p class="text-sm opacity-60 mt-2 mb-3">
+                <LangText text={post.data.description} />
+              </p>
             </div>
           </a>
         ))

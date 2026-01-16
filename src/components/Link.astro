@@ -1,7 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import LangText from "./LangText.astro";
+import type { LocalizedString } from "../types/config";
 interface Props {
-  text: string;
+  text: string | LocalizedString;
   href: string;
   external?: boolean;
   noAnchor?: boolean;
@@ -20,14 +22,18 @@ const { text, href, external, noAnchor } = Astro.props;
       <div class="rotate-45">
         <Icon name="mdi:arrow-up" />
       </div>
-      <span>{text}</span>
+      <span>
+        {typeof text === "string" ? text : <LangText text={text} />}
+      </span>
     </a>
   ) : (
     <div class="flex items-center gap-2 opacity-60 group-hover:opacity-30 hover:!opacity-60 transition-opacity">
       <div class="rotate-45">
         <Icon name="mdi:arrow-up" />
       </div>
-      <span>{text}</span>
+      <span>
+        {typeof text === "string" ? text : <LangText text={text} />}
+      </span>
     </div>
   )
 }

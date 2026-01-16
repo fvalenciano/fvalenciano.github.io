@@ -1,36 +1,43 @@
 ---
 import { Image } from "astro:assets";
-import type { Project } from "../types/config";
-import {marked} from "marked"
+import type { CollectionEntry } from "astro:content";
+import { marked } from "marked";
+import LangText from "./LangText.astro";
 
-type Props = Project;
+type Props = {
+  project: CollectionEntry<"projects">;
+};
 
-const { title, description, image, year, url } = Astro.props;
+const { project } = Astro.props;
+const { title, description, image, year } = project.data;
 
-const htmlDescription = marked.parse(description)
+const htmlDescriptionEn = marked.parse(description.en);
+const htmlDescriptionEs = marked.parse(description.es);
 ---
 
 <a
-  href={url}
-  target="_blank"
-  class="sm:py-5 py-10 flex flex-col sm:flex-row gap-6 group-hover:opacity-60 hover:!opacity-100 transition-opacity"
+  href={`/projects/${project.id}`}
+  class="sm:flex sm:flex-row-reverse sm:justify-between sm:gap-6"
 >
-  <div class="h-full bg-gray-700 rounded-lg aspect-video sm:h-[150px]">
-    <Image
-      width={1920}
-      height={1080}
-      src={image}
-      alt={title}
-      class="w-full h-full object-cover rounded-lg aspect-video"
-    />
-  </div>
-  <div>
-    <div class="flex items-center gap-1 mb-2">
-      <h2 class="font-medium">{title}</h2>
-      <span class="opacity-60">· {year}</span>
-    </div>
-    <div class="opacity-60">
-      <Fragment set:html={htmlDescription} />
+  <Image
+    src={image}
+    alt={title.en}
+    width={100}
+    height={100}
+    class="rounded-lg w-[100px] h-[100px] object-cover"
+  />
+  <div class="mt-4 sm:my-auto">
+    <p class="opacity-60 mb-2">{year}</p>
+    <h3 class="font-medium hover-underline">
+      <LangText text={title} />
+    </h3>
+    <div class="text-sm opacity-60 mt-2 mb-3">
+      <div class="lang-en">
+        <Fragment set:html={htmlDescriptionEn} />
+      </div>
+      <div class="lang-es">
+        <Fragment set:html={htmlDescriptionEs} />
+      </div>
     </div>
   </div>
 </a>
