@@ -10,6 +10,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   integrations: [icon()],
   output: "static",
+  base: "/",
   site: "https://fvalenciano.github.io",
 
   markdown: {

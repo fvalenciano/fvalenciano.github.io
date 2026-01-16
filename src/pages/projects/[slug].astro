@@ -1,8 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
 import LangText from "../../components/LangText.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("projects");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+  }));
+}
 
 const { slug } = Astro.params;
 const entry = await getEntry("projects", slug as string);
